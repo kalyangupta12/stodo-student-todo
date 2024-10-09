@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Typography, Card } from "@material-tailwind/react";
-import ringtone from "alarm.mp3"
+
 function PomoDoro() {
   const defaultTime = 25 * 60; // Default time is 25 minutes in seconds
   const [secondsLeft, setSecondsLeft] = useState(() => {
@@ -8,7 +8,7 @@ function PomoDoro() {
     return savedTime ? JSON.parse(savedTime) : defaultTime;
   });
   const [timer, setTimer] = useState(null); // Timer reference
-  const alarmSound = new Audio(ringtone); // Path to the alarm sound
+  const alarmSound = new Audio("/alarm.mp3"); // Path to the alarm sound
 
   // Preload alarm sound
   useEffect(() => {
