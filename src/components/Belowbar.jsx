@@ -20,7 +20,7 @@ export function Belowbar() {
           <li>
             <Typography
               as="a"
-              href="#"
+              href="https://github.com/kalyangupta12"
               color="blue-gray"
               className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
             >
@@ -30,7 +30,7 @@ export function Belowbar() {
           <li>
             <Typography
               as="a"
-              href="#"
+              href="https://linkedin.com/in/kalyangupta12"
               color="blue-gray"
               className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
             >

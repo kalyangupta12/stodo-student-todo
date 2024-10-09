@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Navbar,
   MobileNav,
@@ -8,118 +8,97 @@ import {
 } from "@material-tailwind/react";
 
 function StickyNavbar() {
-  const [openNav, setOpenNav] = React.useState(false);
+  const [openNav, setOpenNav] = useState(false);
 
-  React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false),
-    );
+  // Handle resizing for mobile menu
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 960) setOpenNav(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
+    <ul className="flex flex-col lg:flex-row lg:items-center gap-4">
+      <li>
+        <a href="#" className="text-blue-gray-700 hover:text-blue-500">
           About
         </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center">
+      </li>
+      <li>
+        <a href="#" className="text-blue-gray-700 hover:text-blue-500">
           Blocks
         </a>
-      </Typography>
+      </li>
     </ul>
   );
 
   return (
-    <Navbar className="sticky top-0 z-10 w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
-      <div className="flex items-center justify-between text-blue-gray-900 mx-auto w-full max-w-screen-xl">
+    <Navbar className="sticky top-0 z-10 w-full bg-white shadow-lg py-2 px-4 lg:px-8">
+      <div className="container mx-auto flex items-center justify-between">
         <Typography
           as="a"
           href="#"
-          className="mr-4 cursor-pointer py-1.5 font-medium"
+          className="text-xl font-semibold text-blue-gray-900"
         >
           Stodo - Student Todo
         </Typography>
-        <div className="flex items-center gap-4">
-          {/* Desktop navigation */}
-          <div className="mr-4 hidden lg:block">{navList}</div>
-          <div className="flex items-center gap-x-1">
-            <Button
-              variant="text"
-              size="sm"
-              className="hidden lg:inline-block"
-            >
-              <span>Home</span>
-            </Button>
-            <Button
-              variant="gradient"
-              size="sm"
-              className="hidden lg:inline-block"
-            >
-              <span>Your Task</span>
-            </Button>
-          </div>
-          {/* Mobile Menu Icon */}
-          <IconButton
-            variant="text"
-            className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-            ripple={false}
-            onClick={() => setOpenNav(!openNav)}
-          >
-            {openNav ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                className="h-6 w-6"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
-          </IconButton>
-        </div>
-      </div>
-      {/* Mobile navigation */}
-      <MobileNav open={openNav}>
-        {navList}
-        <div className="flex flex-col gap-2">
-          <Button fullWidth variant="text" size="sm">
-            <span>Home</span>
+        
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex lg:items-center lg:gap-6">
+          {navList}
+          <Button variant="text" className="text-blue-gray-700">
+            Home
           </Button>
-          <Button fullWidth variant="gradient" size="sm">
-            <span>Your Task</span>
+          <Button variant="gradient">Your Task</Button>
+        </div>
+        
+        {/* Mobile Menu Icon */}
+        <IconButton
+          variant="text"
+          className="lg:hidden"
+          onClick={() => setOpenNav(!openNav)}
+        >
+          {openNav ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </IconButton>
+      </div>
+
+      {/* Mobile Navigation */}
+      <MobileNav open={openNav}>
+        <div className="flex flex-col items-center gap-4 mt-4">
+          {navList}
+          <Button variant="text" fullWidth>
+            Home
+          </Button>
+          <Button variant="gradient" fullWidth>
+            Your Task
           </Button>
         </div>
       </MobileNav>
