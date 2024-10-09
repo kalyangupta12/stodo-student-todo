@@ -8,7 +8,7 @@ function PomoDoro() {
     return savedTime ? JSON.parse(savedTime) : defaultTime;
   });
   const [timer, setTimer] = useState(null); // Timer reference
-  const alarmSound = new Audio("alarm/alarm.mp3"); // Path to the alarm sound
+  const alarmSound = new Audio("alarm.mp3"); // Path to the alarm sound
 
   // Preload alarm sound
   useEffect(() => {
