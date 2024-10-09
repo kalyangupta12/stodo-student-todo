@@ -1,5 +1,5 @@
 import StickyNavbar from "./components/Navbar"
-import { Belowbar } from "./components/Belowbar"
+import Belowbar from "./components/Belowbar"
 import MainPart from "./components/MainPart"
 function App() {
  
