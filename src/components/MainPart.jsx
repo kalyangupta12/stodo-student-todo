@@ -58,11 +58,63 @@ function MainPart() {
         
         {/* Left Side: Spotify Playlist */}
         <div className="col-span-1">
-          <Card className="p-4 shadow-lg">
+        <Card className="p-4 shadow-lg">
+      <Typography variant="h4" color="black" className="mb-4 mt-4 text-center">
+        Study Lofi Songs
+      </Typography>
+      <div className="w-full h-full">
+      <iframe
+        width="100%"
+        height="300"
+        scrolling="no"
+        frameBorder="no"
+        allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/293144880&color=%23181c1c&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+        style={{ borderRadius: "12px" }}
+      ></iframe>
+      <div
+        style={{
+          fontSize: "10px",
+          color: "#cccccc",
+          lineBreak: "anywhere",
+          wordBreak: "normal",
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
+          fontFamily: "Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif",
+          fontWeight: 100,
+        }}
+      >
+        <a
+          href="https://soundcloud.com/lofi_study"
+          title="Sleeping~Beat~Instrumentals~For~Playlist~Songs"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#cccccc", textDecoration: "none" }}
+        >
+          Sleeping~Beat~Instrumentals~For~Playlist~Songs
+        </a>
+        {" · "}
+        <a
+          href="https://soundcloud.com/lofi_study/sets/lofi-beats-chill-sad-study-sleep-relax-jazz-guitar-piano-instrumental-relaxing-music-rap-mix-2023-lo-fi-soft-lofi-hip-hop"
+          title="LoFi~Beats~Chill~Sad~Study~Sleep~Relax~Jazz~Guitar~Piano~Instrumental~Relaxing~Music~Rap~Mix~2023"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#cccccc", textDecoration: "none" }}
+        >
+          LoFi~Beats~Chill~Sad~Study~Sleep~Relax~Jazz~Guitar~Piano~Instrumental~Relaxing~Music~Rap~Mix~2023
+        </a>
+      </div>
+      </div>
+    </Card>
+          {/* <Card className="p-4 shadow-lg">
+          <Typography variant="h4" color="black" className="mb-4 mt-4 text-center">
+              Devotional Songs
+            </Typography>
             <div className="w-full h-full">
               <iframe
                 style={{ borderRadius: "12px" }}
-                src="https://open.spotify.com/embed/playlist/0ofsIXBCxkqYtt30YoJm1c?utm_source=generator&theme=0"
+                src="https://open.spotify.com/embed/playlist/7eiJ7L7ptVnTccJMNW1sXf?utm_source=generator&theme=0"
                 width="100%"
                 height="352"
                 frameBorder="0"
@@ -71,7 +123,7 @@ function MainPart() {
                 loading="lazy"
               ></iframe>
             </div>
-          </Card>
+          </Card> */}
         </div>
 
         {/* Center: Todo List */}
