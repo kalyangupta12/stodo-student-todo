@@ -8,7 +8,7 @@ Stodo is a student-oriented todo application built using React and Vite. This pr
 - **User-friendly Interface:** An easy-to-navigate interface for managing tasks.
 - **Responsive Design:** Works well on various devices, including mobile and desktop.
 - **Task Management:** Create, update, and delete tasks with ease.
-- **EmbeddedSptify Playlist:** Listen to the study music and focus on your work.
+- **Embedded SoundCloud Playlist:** Listen to the study music and focus on your work.
 
 ## Getting Started
 
