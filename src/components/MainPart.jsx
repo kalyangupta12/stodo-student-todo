@@ -20,12 +20,12 @@ function MainPart() {
   // State for playlists
   const [soundcloudUrl, setSoundcloudUrl] = useState("");
   const [jiosaavnUrl, setJiosaavnUrl] = useState("");
-  const [savedSoundcloudUrl, setSavedSoundcloudUrl] = useState(
-    "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/293144880&color=%23181c1c&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-  );
+  const [savedSoundcloudUrl, setSavedSoundcloudUrl] = useState("");
 
   // Load saved SoundCloud URL from localStorage on component mount
   useEffect(() => {
+    let initialUrl = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/293144880&color=%23181c1c&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true";
+    setSavedSoundcloudUrl(initialUrl);
     const savedSoundcloud = localStorage.getItem("soundcloudUrl");
     if (savedSoundcloud) setSavedSoundcloudUrl(savedSoundcloud);
   }, []);
