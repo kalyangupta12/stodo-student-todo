@@ -38,10 +38,14 @@ function MainPart() {
 
   // Function to save playlists to localStorage
   const savePlaylists = () => {
-    localStorage.setItem("soundcloudUrl", soundcloudUrl);
-    localStorage.setItem("spotifyUrl", spotifyUrl);
-    setSavedSoundcloudUrl(soundcloudUrl);
-    setSavedSpotifyUrl(spotifyUrl);
+    if (soundcloudUrl) {
+      localStorage.setItem("soundcloudUrl", soundcloudUrl);
+      setSavedSoundcloudUrl(soundcloudUrl);
+    }
+    if (spotifyUrl) {
+      localStorage.setItem("spotifyUrl", spotifyUrl);
+      setSavedSpotifyUrl(spotifyUrl);
+    }
     setSoundcloudUrl("");
     setSpotifyUrl("");
   };
