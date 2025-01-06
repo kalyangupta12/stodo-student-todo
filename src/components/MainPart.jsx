@@ -8,7 +8,6 @@ import {
 import PomoDoro from './PomoDoro';
 
 function MainPart() {
-  // State for todo list
   const [todo, setTodo] = useState("");
   const [todoList, setTodoList] = useState(() => {
     const savedTodos = localStorage.getItem("todoList");
@@ -17,12 +16,10 @@ function MainPart() {
   const [isEditing, setIsEditing] = useState(false);
   const [currentTodoIndex, setCurrentTodoIndex] = useState(null);
 
-  // State for playlists
   const [soundcloudUrl, setSoundcloudUrl] = useState("");
   const [jiosaavnUrl, setJiosaavnUrl] = useState("");
   const [savedSoundcloudUrl, setSavedSoundcloudUrl] = useState("");
 
-  // Load saved SoundCloud URL from localStorage on component mount
   useEffect(() => {
     let initialUrl = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/293144880&color=%23181c1c&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true";
     setSavedSoundcloudUrl(initialUrl);
@@ -30,28 +27,42 @@ function MainPart() {
     if (savedSoundcloud) setSavedSoundcloudUrl(savedSoundcloud);
   }, []);
 
-  // Save todoList to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
   }, [todoList]);
 
-  // Function to save SoundCloud URL to localStorage
+  const convertToEmbedUrl = (url) => {
+    try {
+      const urlObj = new URL(url);
+      const pathSegments = urlObj.pathname.split("/");
+      if (pathSegments[1] === "playlists" || pathSegments[1] === "tracks") {
+        return `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com${urlObj.pathname}&color=%23181c1c&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`;
+      }
+    } catch (error) {
+      console.error("Invalid SoundCloud URL");
+    }
+    return null;
+  };
+
   const saveSoundcloudPlaylist = () => {
     if (soundcloudUrl) {
-      localStorage.setItem("soundcloudUrl", soundcloudUrl);
-      setSavedSoundcloudUrl(soundcloudUrl);
-      setSoundcloudUrl("");
+      const embedUrl = convertToEmbedUrl(soundcloudUrl);
+      if (embedUrl) {
+        localStorage.setItem("soundcloudUrl", embedUrl);
+        setSavedSoundcloudUrl(embedUrl);
+        setSoundcloudUrl("");
+      } else {
+        alert("Please enter a valid SoundCloud playlist or track URL.");
+      }
     }
   };
 
-  // Function to open JioSaavn playlist in a new tab
   const openJiosaavnPlaylist = () => {
     if (jiosaavnUrl) {
       window.open(jiosaavnUrl, "_blank");
     }
   };
 
-  // Function to add or edit a todo
   const handleTodo = () => {
     const trimmedTodo = todo.trim();
     if (trimmedTodo) {
@@ -68,13 +79,11 @@ function MainPart() {
     }
   };
 
-  // Function to delete a todo
   const deleteTodo = (index) => {
     const updatedTodos = todoList.filter((_, i) => i !== index);
     setTodoList(updatedTodos);
   };
 
-  // Function to set a todo for editing
   const editTodo = (index) => {
     setTodo(todoList[index]);
     setIsEditing(true);
@@ -91,6 +100,22 @@ function MainPart() {
             <Typography variant="h4" color="black" className="mb-4 mt-4 text-center">
               Add Your Playlist
             </Typography>
+
+            {/* Display Saved SoundCloud Playlist */}
+            <div className="mb-6">
+              <Typography variant="h6" color="black" className="mb-2">
+                Your SoundCloud Playlist
+              </Typography>
+              <iframe
+                width="100%"
+                height="300"
+                scrolling="no"
+                frameBorder="no"
+                allow="autoplay"
+                src={savedSoundcloudUrl}
+                style={{ borderRadius: "12px" }}
+              ></iframe>
+            </div>
 
             {/* Input for SoundCloud Playlist */}
             <div className="mb-4">
@@ -133,22 +158,6 @@ function MainPart() {
             >
               Open JioSaavn Playlist
             </Button>
-
-            {/* Display Saved SoundCloud Playlist */}
-            <div className="mt-6">
-              <Typography variant="h6" color="black" className="mb-2">
-                Your SoundCloud Playlist
-              </Typography>
-              <iframe
-                width="100%"
-                height="300"
-                scrolling="no"
-                frameBorder="no"
-                allow="autoplay"
-                src={savedSoundcloudUrl}
-                style={{ borderRadius: "12px" }}
-              ></iframe>
-            </div>
           </Card>
         </div>
 
