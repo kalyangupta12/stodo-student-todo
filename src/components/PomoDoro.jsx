@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Typography, Card } from "@material-tailwind/react";
+import { Button, Typography, Card, Input } from "@material-tailwind/react";
 
 function PomoDoro() {
   const defaultTime = 25 * 60; // Default time is 25 minutes in seconds
@@ -8,6 +8,7 @@ function PomoDoro() {
     return savedTime ? JSON.parse(savedTime) : defaultTime;
   });
   const [timer, setTimer] = useState(null); // Timer reference
+  const [manualTime, setManualTime] = useState(""); // State for manual time input
   const alarmSound = new Audio("/alarm.mp3"); // Path to the alarm sound
 
   // Preload alarm sound
@@ -31,6 +32,19 @@ function PomoDoro() {
     setTimer(null); // Reset the timer reference
     setSecondsLeft(defaultTime); // Reset the timer to default time (25 minutes)
     localStorage.setItem("secondsLeft", JSON.stringify(defaultTime)); // Update localStorage
+  };
+
+  // Set manual timer
+  const setManualTimer = () => {
+    const timeInMinutes = parseInt(manualTime, 10);
+    if (!isNaN(timeInMinutes) && timeInMinutes > 0) {
+      const newTime = timeInMinutes * 60;
+      setSecondsLeft(newTime);
+      localStorage.setItem("secondsLeft", JSON.stringify(newTime));
+      setManualTime(""); // Clear the input field
+    } else {
+      alert("Please enter a valid time in minutes.");
+    }
   };
 
   // Save the time in local storage whenever it updates
@@ -72,6 +86,23 @@ function PomoDoro() {
         </Button>
         <Button onClick={reset} size="lg" color="black">
           Reset
+        </Button>
+      </div>
+
+      {/* Manual Timer Set Section */}
+      <div className="mt-6 flex flex-col items-center gap-4">
+        <Typography variant="h6" color="black">
+          Set Custom Time (in minutes):
+        </Typography>
+        <Input
+          type="number"
+          value={manualTime}
+          onChange={(e) => setManualTime(e.target.value)}
+          placeholder="Enter time in minutes"
+          className="w-48"
+        />
+        <Button onClick={setManualTimer} size="lg" color="black">
+          Set Timer
         </Button>
       </div>
     </Card>
