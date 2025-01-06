@@ -90,20 +90,22 @@ function PomoDoro() {
       </div>
 
       {/* Manual Timer Set Section */}
-      <div className="mt-6 flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4">
         <Typography variant="h6" color="black">
           Set Custom Time (in minutes):
         </Typography>
+        <div className="flex items-center gap-2">
         <Input
           type="number"
           value={manualTime}
           onChange={(e) => setManualTime(e.target.value)}
           placeholder="Enter time in minutes"
-          className="w-32 text-center"
+           className="w-32 text-center"
         />
-        <Button onClick={setManualTimer} size="lg" color="black">
+        <Button onClick={setManualTimer} size="lg" color="black" className="flex items-center gap-2">
           Set Timer
         </Button>
+        </div>
       </div>
     </Card>
   );
