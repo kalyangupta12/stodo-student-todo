@@ -103,7 +103,7 @@ function PomoDoro() {
            className="w-32 text-center"
         />
         <Button onClick={setManualTimer} size="lg" color="black" className="flex items-center gap-2">
-          Set Timer
+          Set
         </Button>
         </div>
       </div>
