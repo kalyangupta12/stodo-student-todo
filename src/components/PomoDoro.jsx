@@ -18,7 +18,7 @@ function PomoDoro() {
 
   // Start the timer
   const start = () => {
-    if (!timer && secondsLeft > 0) { // Only start if no timer is running and time is left
+    if (!timer && secondsLeft > 0) {
       const interval = setInterval(() => {
         setSecondsLeft((prev) => (prev > 0 ? prev - 1 : 0)); // Prevent negative time
       }, 1000);
@@ -71,41 +71,70 @@ function PomoDoro() {
   };
 
   return (
-    <Card className="p-6 shadow-lg">
-      <Typography variant="h2" color="black" className="mb-4 text-center">
-        Pomodoro Timer
-      </Typography>
-
-      <Typography variant="h3" color="black" className="font-mono text-4xl text-center">
-        {formatTime()} {/* Display the formatted time */}
-      </Typography>
-
-      <div className="flex justify-center gap-4 mt-6">
-        <Button onClick={start} size="lg" color="black">
-          Start
-        </Button>
-        <Button onClick={reset} size="lg" color="black">
-          Reset
-        </Button>
-      </div>
-
-      {/* Manual Timer Set Section */}
-      <div className="mt-6 flex flex-col items-center gap-4">
-        <Typography variant="h6" color="black">
-          Set Custom Time (in minutes):
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+      <Card className="p-8 shadow-2xl bg-white/90 backdrop-blur-sm rounded-2xl w-full max-w-md">
+        <Typography variant="h2" color="blue-gray" className="mb-6 text-center font-bold">
+          Pomodoro Timer
         </Typography>
-        <Input
-          type="number"
-          value={manualTime}
-          onChange={(e) => setManualTime(e.target.value)}
-          placeholder="Enter time in minutes"
-          className="w-48"
-        />
-        <Button onClick={setManualTimer} size="lg" color="black">
-          Set Timer
-        </Button>
-      </div>
-    </Card>
+
+        {/* Timer Display */}
+        <div className="flex justify-center mb-8">
+          <Typography
+            variant="h1"
+            color="blue-gray"
+            className="font-mono text-6xl font-bold"
+          >
+            {formatTime()}
+          </Typography>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex justify-center gap-4 mb-8">
+          <Button
+            onClick={start}
+            size="lg"
+            color="green"
+            className="flex items-center gap-2"
+            disabled={timer !== null}
+          >
+            <i className="fas fa-play" /> Start
+          </Button>
+          <Button
+            onClick={reset}
+            size="lg"
+            color="red"
+            className="flex items-center gap-2"
+          >
+            <i className="fas fa-redo" /> Reset
+          </Button>
+        </div>
+
+        {/* Manual Timer Set Section */}
+        <div className="flex flex-col items-center gap-4">
+          <Typography variant="h6" color="blue-gray" className="font-semibold">
+            Set Custom Time
+          </Typography>
+          <div className="flex items-center gap-2">
+            <Input
+              type="number"
+              value={manualTime}
+              onChange={(e) => setManualTime(e.target.value)}
+              placeholder="Enter minutes"
+              className="w-32 text-center"
+              labelProps={{ className: "hidden" }}
+            />
+            <Button
+              onClick={setManualTimer}
+              size="md"
+              color="blue"
+              className="flex items-center gap-2"
+            >
+              <i className="fas fa-clock" /> Set
+            </Button>
+          </div>
+        </div>
+      </Card>
+    </div>
   );
 }
 
