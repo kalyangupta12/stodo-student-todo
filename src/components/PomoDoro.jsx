@@ -91,7 +91,7 @@ function PomoDoro() {
 
       {/* Manual Timer Set Section */}
       <div className="flex flex-col items-center gap-4">
-        <Typography variant="h6" color="black">
+        <Typography variant="h6" color="black" classname="mt-4">
           Set Custom Time (in minutes):
         </Typography>
         <div className="flex items-center gap-2">
